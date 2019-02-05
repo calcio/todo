@@ -1,0 +1,7 @@
+1: Clone o projeto (referencia: https://github.com/yiisoft/yii2-app-basic)
+
+2: Execute o comando: docker-compose run --rm todo-server composer update --prefer-dist
+
+3: Execute o comando: docker-compose up -d para iniciar o docker
+
+4:

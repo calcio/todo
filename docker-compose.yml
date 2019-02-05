@@ -1,9 +1,47 @@
-version: '2'
+version: '3.1'
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
-    ports:
-      - '8000:80'
+    todo-server:
+        image: yiisoftware/yii2-php:7.1-apache
+        container_name: todo-server
+        volumes:
+          - ~/.composer-docker/cache:/root/.composer/cache:delegated
+          - ./:/app:delegated
+        ports:
+          - '8000:80'
+        networks:
+            - todo-network
+        depends_on:
+            - todo-db
+    todo-db:
+        image: mysql:5.7
+        container_name: todo-db
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=admin
+            - MYSQL_PASSWORD=admin
+            - MYSQL_DATABASE=todo
+        ports:
+            - "3307:3306"
+        networks:
+            - todo-network
+        volumes:
+            - ./data:/var/lib/mysql
+
+    todo-phpmyadmin:
+        image: phpmyadmin/phpmyadmin:4.7
+        container_name: todo-phpmyadmin
+        ports:
+            - '8001:80'
+            - '443:443'
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=todo-db
+        depends_on:
+            - todo-db
+        volumes:
+            - ./data:/var/lib/mysql
+        networks:
+            - todo-network
+networks:
+    todo-network:
+        driver: bridge
