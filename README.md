@@ -18,9 +18,9 @@ O Sistema está rodando com o Docker
 
 Atualizações dos pacotes
 
-    docker-compose run --rm php composer update --prefer-dist
+    docker-compose run --rm todo-server composer update --prefer-dist
 
-    docker-compose run --rm php composer install    
+    docker-compose run --rm todo-server composer install    
 
 Iniciar o container
 

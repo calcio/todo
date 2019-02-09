@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TodoList */
 
-$this->title = Yii::t('app', 'Alterar Tarefa: {name}', [
+$this->title = Yii::t('app', 'Update Todo List: {name}', [
     'name' => $model->task,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Todo Lists'), 'url' => ['index']];
