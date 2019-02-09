@@ -14,8 +14,6 @@ Instalação
 O Sistema está rodando com o Docker
 
 
-
-
 ### Docker
 
 Atualizações dos pacotes
@@ -37,14 +35,18 @@ CONFIGURATION
 
 ### Database
 
-Edit the file `config/db.php` with real data, for example:
+Se precisar edite o arquivo `config/db.php`.
 
 ```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
+    'dsn' => 'mysql:host=todo-db;dbname=todo',
+    'username' => 'admin',
+    'password' => 'admin',
     'charset' => 'utf8',
 ];
 ```
+
+Após verificar as credenciais do banco rodar as migrations com o comando
+
+```docker-compose exec todo-server php yii migrate```

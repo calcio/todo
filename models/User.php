@@ -27,6 +27,10 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         ],
     ];
 
+    public static function usersList()
+    {
+        return \yii\helpers\ArrayHelper::map(self::$users, 'id', 'username');
+    }
 
     /**
      * {@inheritdoc}

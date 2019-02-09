@@ -60,7 +60,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return Yii::$app->getResponse()->redirect(['site/login'],302);
+        } else {
+            return Yii::$app->getResponse()->redirect(['todo-list/index'],302);
+        }
     }
 
     /**
