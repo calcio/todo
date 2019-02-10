@@ -38,7 +38,7 @@ class TodoList extends \yii\db\ActiveRecord
             [['user_id', 'task'], 'required'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['task'], 'string', 'max' => 255],
+            [['task'], 'string', 'max' => 255, 'min' => 3],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
         ];
     }
@@ -63,10 +63,10 @@ class TodoList extends \yii\db\ActiveRecord
     public function getAllParentToDo()
     {
         return TodoList::find()
-                    ->select('id, task')
-                    ->where(['parent_id' => null])
-                    ->orderBy('task')
-                    ->all();
+            ->select('id, task')
+            ->where(['parent_id' => null])
+            ->orderBy('task')
+            ->all();
     }
 
     public function getAllParentToDoAsArray()

@@ -69,18 +69,14 @@ class TodoListController extends Controller
     {
         $model = new TodoList();
         $user = new User();
-        // $status = new Status();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
-        // \yii\helpers\VarDumper::dump($user->usersList(), 10 , true);
-
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
             'usersList' => $user->usersList(),
-            // 'statusList' => $status->getAllCategoriesAsArray(),
         ]);
     }
 
@@ -98,7 +94,7 @@ class TodoListController extends Controller
         $status = new Status();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
