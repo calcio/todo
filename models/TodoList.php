@@ -71,7 +71,7 @@ class TodoList extends \yii\db\ActiveRecord
 
     public function getAllParentToDoAsArray()
     {
-        return yii\helpers\ArrayHelper::map($this->getAllParentToDo(), 'id', 'task');
+        return \yii\helpers\ArrayHelper::map($this->getAllParentToDo(), 'id', 'task');
     }
 
     /**

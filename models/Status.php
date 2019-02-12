@@ -59,7 +59,7 @@ class Status extends \yii\db\ActiveRecord
 
     public function getAllStatusAsArray()
     {
-        return yii\helpers\ArrayHelper::map($this->getAllStatus(), 'id', 'title');
+        return \yii\helpers\ArrayHelper::map($this->getAllStatus(), 'id', 'title');
     }
 
     /**

@@ -41,9 +41,12 @@ class TodoListController extends Controller
         $searchModel = new TodoListSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $status = new Status();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'statusList' => $status->getAllStatusAsArray(),
         ]);
     }
 
