@@ -8,6 +8,9 @@ echo GridView::widget([
     'layout' => "{items}\n{pager}",
     'dataProvider'=> $dataProvider,
     'columns' => [
+        ['class' => 'kartik\grid\SerialColumn'],
+        'task',
+        'description:ntext',
         [
             'attribute' => 'status_id',
             'value' => 'status.title',
@@ -16,12 +19,6 @@ echo GridView::widget([
             'contentOptions' => [
                 'class' => 'text-center'
             ],
-        ],
-        'task',
-        'description:ntext',
-        [
-            'class' => '\kartik\grid\CheckboxColumn',
-            'rowSelectedClass' => GridView::TYPE_WARNING
         ],
         [
             'class' => 'kartik\grid\ActionColumn',
@@ -33,16 +30,31 @@ echo GridView::widget([
                 'class' => 'text-center'
             ],
             'buttons' => [
+                'view' => function ($url, $model) {
+                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#', [
+                        'title' => Yii::t('app', 'View'),
+                        'value' => $url,
+                        'class' => 'viewButton'
+                    ]);
+                },
+                'update' => function ($url, $model) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', [
+                        'type' => 'button',
+                        'title' => Yii::t('app', 'Update'),
+                        'value' => $url,
+                        'class' => 'updateButton btn-link'
+                    ]);
+                },
                 'delete' => function ($url, $model) {
                     return Html::a('<span class="glyphicon glyphicon-trash text-danger"></span>', $url, [
-                        'name' => 'Delete',
+                        'title' => Yii::t('app', 'Delete'),
                         'data-confirm' => sprintf(
-                            'Deseja deletar tarefa: %s?',
+                            'Deseja deletar a tarefa: %s?',
                             $model->task
                         ),
                         'data-method' => 'POST'
                     ]);
-                },
+                }
             ]
         ],
     ],

@@ -40,7 +40,7 @@ class TodoListSearch extends TodoList
      */
     public function search($params)
     {
-        $query = TodoList::find();
+        $query = TodoList::find()->where(['parent_id' => null]);
 
         // add conditions that should always apply here
 
@@ -51,15 +51,12 @@ class TodoListSearch extends TodoList
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'parent_id' => $this->parent_id,
             'user_id' => $this->user_id,
             'status_id' => $this->status_id,
             'created_at' => $this->created_at,

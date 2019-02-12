@@ -58,7 +58,7 @@ class TodoListController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -100,7 +100,7 @@ class TodoListController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
             'usersList' => $user->usersList(),
             'statusList' => $status->getAllStatusAsArray(),

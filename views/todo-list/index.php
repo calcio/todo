@@ -15,11 +15,27 @@ $this->title = Yii::t('app', 'ToDo List');
 $this->params['breadcrumbs'][] = $this->title;
 
 Modal::begin([
-    'header' => '<h1>' . Yii::t('app', 'Create Todo List') . '</h1>',
     'id' => 'modalFormTodoListContent',
+    'header' => '<h1>' . Yii::t('app', 'Create Todo List') . '</h1>',
     'size' => 'modal-md',
 ]);
 echo '<div id="formTodoListContent"></div>';
+Modal::end();
+
+Modal::begin([
+    'id' => 'modalFormTodoListContentUpdate',
+    'header' => '<h1>' . Yii::t('app', 'Update Todo List') . '</h1>',
+    'size' => 'modal-md',
+]);
+echo '<div id="formTodoListContentUpdate"></div>';
+Modal::end();
+
+Modal::begin([
+    'id' => 'modalFormTodoListContentView',
+    'header' => '<h1>' . Yii::t('app', 'Detail') . '</h1>',
+    'size' => 'modal-md',
+]);
+echo '<div id="formTodoListContentView"></div>';
 Modal::end();
 ?>
 
@@ -87,6 +103,8 @@ Modal::end();
                     'class' => 'text-center'
                 ],
             ],
+            'task',
+            'description:ntext',
             [
                 'attribute' => 'status_id',
                 'value' => 'status.title',
@@ -95,12 +113,6 @@ Modal::end();
                 'contentOptions' => [
                     'class' => 'text-center'
                 ],
-            ],
-            'task',
-            'description:ntext',
-            [
-                'class' => '\kartik\grid\CheckboxColumn',
-                'rowSelectedClass' => GridView::TYPE_WARNING
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -112,16 +124,31 @@ Modal::end();
                     'class' => 'text-center'
                 ],
                 'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#', [
+                            'title' => Yii::t('app', 'View'),
+                            'value' => $url,
+                            'class' => 'viewButton'
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', [
+                            'type' => 'button',
+                            'title' => Yii::t('app', 'Update'),
+                            'value' => $url,
+                            'class' => 'updateButton btn-link'
+                        ]);
+                    },
                     'delete' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-trash text-danger"></span>', $url, [
-                            'name' => 'Delete',
+                            'title' => Yii::t('app', 'Delete'),
                             'data-confirm' => sprintf(
                                 'Deseja deletar a tarefa: %s?',
                                 $model->task
                             ),
                             'data-method' => 'POST'
                         ]);
-                    },
+                    }
                 ]
             ],
         ]
