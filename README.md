@@ -26,12 +26,15 @@ Iniciar o container
 
     docker-compose up -d
 
-Acesse a aplicação:
-
-    http://127.0.0.1:8000
-
-CONFIGURATION
+CONFIGURATÇÃO
 -------------
+
+### Permissões
+
+cd todo
+sudo chmod 777 -R runtime/
+sudo chmod 777 -R web/assets/
+
 
 ### Database
 
@@ -50,3 +53,7 @@ return [
 Após verificar as credenciais do banco rodar as migrations com o comando
 
 ```docker-compose exec todo-server php yii migrate```
+
+### Acesse a aplicação:
+
+    [http://127.0.0.1:8000](http://127.0.0.1:8000)
